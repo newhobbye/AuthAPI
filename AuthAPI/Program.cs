@@ -16,6 +16,8 @@ builder.Services.AddScoped<IAuthJWTService, AuthJWTService>();
 builder.Services.AddScoped<IUserService, UserService>();
 #endregion
 
+builder.Services.AddCors();
+
 builder.Services.Configure<TokenManagement>(builder.Configuration.GetSection("tokenManagement"));
 
 var app = builder.Build();
@@ -26,6 +28,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+#region[Cors]
+app.UseCors(c =>
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
+});
+#endregion
 
 app.UseHttpsRedirection();
 

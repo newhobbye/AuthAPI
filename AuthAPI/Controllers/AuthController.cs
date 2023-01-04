@@ -22,7 +22,7 @@ namespace AuthAPI.Controllers
             string token = string.Empty;
             TokenResponseModel tokenResponse = new();
 
-            if (_auth.IsAuthenticated(user, out token) is false) return BadRequest();
+            if (_auth.IsAuthenticated(user, out token) is false) return BadRequest("Usuario ou senha invalidos.");
 
             tokenResponse.Token = token;
             tokenResponse.ExpiresIn = 30;
